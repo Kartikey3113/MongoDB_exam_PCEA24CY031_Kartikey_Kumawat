@@ -1,0 +1,28 @@
+use college
+
+// Step 1: Insert one student
+db.students.insertOne({ rollNo: 101, name: "Arun", dept: "CSE", marks: 78, city: "Chennai" })
+
+// Step 2: Insert four more students
+db.students.insertMany([
+  { rollNo: 102, name: "Divya", dept: "IT", marks: 85, city: "Mumbai" },
+  { rollNo: 103, name: "Karthik", dept: "CSE", marks: 62, city: "Chennai" },
+  { rollNo: 104, name: "Priya", dept: "HR", marks: 91, city: "Bangalore" },
+  { rollNo: 105, name: "Suresh", dept: "CSE", marks: 91, city: "Trichy" }
+])
+
+// Step 3: Display all students, then display only CSE students
+db.students.find()
+db.students.find({ dept: "CSE" })
+
+// Step 4: Correct marks of rollNo 103 to 68
+db.students.updateOne({ rollNo: 103 }, { $set: { marks: 68 } })
+
+// Step 5: Add field semester: 3 to every CSE student
+db.students.updateMany({ dept: "CSE" }, { $set: { semester: 3 } })
+
+// Step 6: Delete record of rollNo 104
+db.students.deleteOne({ rollNo: 104 })
+
+// Step 7: Display total remaining students
+db.students.countDocuments()
